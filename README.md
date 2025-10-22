@@ -154,6 +154,7 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 ## 🙏 Crédits
 
 **Développeur :** UNGEUR 
+
 **Librairies utilisées :**
 - [JDA](https://github.com/discord-jda/JDA) - Java Discord API
 - [Spigot API](https://www.spigotmc.org/) - Minecraft Server API
