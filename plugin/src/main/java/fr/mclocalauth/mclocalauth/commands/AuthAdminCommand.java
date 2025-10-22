@@ -27,16 +27,16 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
         if (!sender.hasPermission("mclocalauth.admin")) {
-            sender.sendMessage("Â§cVous n'avez pas la permission.");
+            sender.sendMessage("§cVous n'avez pas la permission.");
             return true;
         }
         if (args.length == 0) {
-            sender.sendMessage("Â§6==== Commandes MCLocalAuth ====");
-            sender.sendMessage("Â§e/auth showips <player> Â§7- Afficher les IP autorisÃ©es");
-            sender.sendMessage("Â§e/auth addip <player> <ip> Â§7- Ajouter une IP autorisÃ©e");
-            sender.sendMessage("Â§e/auth removeip <player> <ip> Â§7- Supprimer une IP");
-            sender.sendMessage("Â§e/auth resetip <player> Â§7- RÃ©initialiser toutes les IP");
-            sender.sendMessage("Â§e/auth setip <player> <ip> Â§7- DÃ©finir IP principale");
+            sender.sendMessage("§6==== Commandes MCLocalAuth ====");
+            sender.sendMessage("§e/auth showips <player> §7- Afficher les IP autorisees");
+            sender.sendMessage("§e/auth addip <player> <ip> §7- Ajouter une IP autorisee");
+            sender.sendMessage("§e/auth removeip <player> <ip> §7- Supprimer une IP");
+            sender.sendMessage("§e/auth resetip <player> §7- Reinitialiser toutes les IP");
+            sender.sendMessage("§e/auth setip <player> <ip> §7- Definir IP principale");
             return true;
         }
         String sub = args[0].toLowerCase();
@@ -80,7 +80,7 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
         if (ips.isEmpty()) {
             sender.sendMessage(msg("admin.noip").replace("%player%", playerName));
         } else {
-            sender.sendMessage("Â§6IP autorisÃ©es pour Â§e" + playerName + "Â§6:");
+            sender.sendMessage("§6IP autorisees pour §e" + playerName + "§6:");
             for (int i = 0; i < ips.size(); i++) {
                 String status = (i == 0) ? " Â§a(principale)" : "";
                 sender.sendMessage("Â§7" + (i + 1) + ". Â§f" + ips.get(i) + status);
@@ -103,10 +103,10 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
         }
         
         if (storage.addIpForPlayer(uuid, ip)) {
-            sender.sendMessage("Â§aIP Â§f" + ip + "Â§a ajoutÃ©e pour Â§e" + playerName);
-            plugin.getLogger().info(sender.getName() + " a ajoutÃ© l'IP " + ip + " pour " + playerName);
+            sender.sendMessage("§aIP §f" + ip + "§a ajoutee pour §e" + playerName);
+            plugin.getLogger().info(sender.getName() + " a ajoute l'IP " + ip + " pour " + playerName);
         } else {
-            sender.sendMessage("Â§eIP Â§f" + ip + "Â§e dÃ©jÃ  autorisÃ©e pour Â§e" + playerName);
+            sender.sendMessage("§eIP §f" + ip + "§e deja autorisee pour §e" + playerName);
         }
         return true;
     }
@@ -119,14 +119,14 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
         }
         
         if (storage.removeIpForPlayer(uuid, ip)) {
-            sender.sendMessage("Â§aIP Â§f" + ip + "Â§a supprimÃ©e pour Â§e" + playerName);
-            plugin.getLogger().info(sender.getName() + " a supprimÃ© l'IP " + ip + " pour " + playerName);
+            sender.sendMessage("§aIP §f" + ip + "§a supprimee pour §e" + playerName);
+            plugin.getLogger().info(sender.getName() + " a supprime l'IP " + ip + " pour " + playerName);
         } else {
             java.util.List<String> ips = storage.getAuthorizedIps(uuid);
             if (ips.size() <= 1) {
-                sender.sendMessage("Â§cImpossible de supprimer la derniÃ¨re IP de Â§e" + playerName);
+                sender.sendMessage("§cImpossible de supprimer la derniere IP de §e" + playerName);
             } else {
-                sender.sendMessage("Â§cIP Â§f" + ip + "Â§c introuvable pour Â§e" + playerName);
+                sender.sendMessage("§cIP §f" + ip + "§c introuvable pour §e" + playerName);
             }
         }
         return true;
@@ -140,8 +140,8 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
         }
         
         storage.resetIp(uuid);
-        sender.sendMessage("Â§aToutes les IP de Â§e" + playerName + "Â§a ont Ã©tÃ© rÃ©initialisÃ©es");
-        plugin.getLogger().info(sender.getName() + " a rÃ©initialisÃ© les IP de " + playerName);
+        sender.sendMessage("§aToutes les IP de §e" + playerName + "§a ont ete reinitialisees");
+        plugin.getLogger().info(sender.getName() + " a reinitialise les IP de " + playerName);
         return true;
     }
     
@@ -159,22 +159,16 @@ public class AuthAdminCommand implements CommandExecutor, TabCompleter {
         
         storage.setIp(uuid, ip, playerName);
         sender.sendMessage(msg("admin.setip").replace("%player%", playerName).replace("%ip%", ip));
-        plugin.getLogger().info(sender.getName() + " a dÃ©fini l'IP " + ip + " pour " + playerName);
+        plugin.getLogger().info(sender.getName() + " a defini l'IP " + ip + " pour " + playerName);
         return true;
     }
     
     private boolean isValidIp(String ip) {
-        // Validation basique d'IP IPv4
-        String[] parts = ip.split("\\.");
-        if (parts.length != 4) return false;
-        
+        // Validation IPv4 ou IPv6
         try {
-            for (String part : parts) {
-                int num = Integer.parseInt(part);
-                if (num < 0 || num > 255) return false;
-            }
+            java.net.InetAddress.getByName(ip);
             return true;
-        } catch (NumberFormatException e) {
+        } catch (java.net.UnknownHostException e) {
             return false;
         }
     }

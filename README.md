@@ -153,8 +153,7 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 
 ## 🙏 Crédits
 
-**Développeur :** UNGEUR 
-
+**Développeur :** [Ton Pseudo]  
 **Librairies utilisées :**
 - [JDA](https://github.com/discord-jda/JDA) - Java Discord API
 - [Spigot API](https://www.spigotmc.org/) - Minecraft Server API
@@ -163,8 +162,9 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 
 ## 📞 Support
 
-- **Discord :** [Serveur Discord](https://discord.gg/hPUhadNQXn)
+- **Discord :** [Lien serveur Discord]
 - **Issues :** [GitHub Issues](../../issues)
+- **Email :** [Ton email si tu veux]
 
 ---
 
@@ -173,5 +173,6 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 **⭐ Si ce plugin t'est utile, n'hésite pas à mettre une étoile !**
 
 Made with ❤️ for the Minecraft community
+
 
 </div>

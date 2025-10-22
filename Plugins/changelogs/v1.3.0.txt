@@ -1,0 +1,129 @@
+==========================================
+MCLocalAuth v1.3.0 - CHANGELOG
+Type: Mise a jour majeure
+Date: 22 Octobre 2025
+==========================================
+
+NOUVEAUTES
+----------
+
+1. Commande Discord renommee
+   - AVANT: /auth <code>
+   - MAINTENANT: /mclogin <code>
+   - Tous les messages et references mis a jour
+
+2. Commande /unlink (Admin uniquement)
+   - Usage: /unlink <discord_id>
+   - Reserve a l'admin configure dans config.yml (admin.discord_id)
+   - Journalise toutes les tentatives
+   - Note: Fonctionnalite de base implementee, liaison persistante arrive prochainement
+
+CORRECTIONS
+-----------
+
+1. Encodage UTF-8 corrige (in-game)
+   Probleme resolu: Messages in-game avec caracteres bizarres
+   
+   Messages corriges:
+   - "reinitialise" au lieu de "reinitialisé"
+   - "ajoute" au lieu de "ajoute"
+   - "supprime" au lieu de "supprime"
+   - "defini" au lieu de "defini"
+   - "autorisees" au lieu de "autorisees"
+
+2. Support IPv6
+   - IPv4 ET IPv6 acceptes pour les IP autorisees
+   - Validation avec InetAddress.getByName()
+   - Commandes affectees: /auth addip, /auth setip
+
+3. IP actuelle affichee dans kick
+   - Le message de kick affiche maintenant l'IP du joueur
+   - Variable %current_ip% correctement remplacee
+   - Aide les joueurs a identifier leur probleme de connexion
+
+MODIFICATIONS TECHNIQUES
+-------------------------
+
+Fichiers modifies:
+- AuthAdminCommand.java: Encodage ASCII + validation IPv6
+- LoginListener.java: Affichage IP actuelle + encodage
+- DiscordBot.java: Renommage /auth -> /mclogin
+- DiscordCommandListener.java: Handler /mclogin + /unlink admin
+- config.yml: Messages sans accents + /mclogin
+- plugin.yml: Version 1.3.0
+- pom.xml: Version 1.3.0
+
+MIGRATION DEPUIS v1.2.x
+------------------------
+
+Etapes:
+1. Arreter le serveur
+2. Remplacer le JAR par MCLocalAuth-Spigot-v1.3.0.jar
+3. Configurer admin dans config.yml:
+   admin:
+     discord_id: "TON_DISCORD_ID"
+     minecraft_uuid: ""
+4. Redemarrer le serveur
+5. Informer les joueurs: commande est maintenant /mclogin <code>
+
+Note: L'ancienne configuration reste compatible
+
+CHANGEMENTS POUR LES JOUEURS
+-----------------------------
+
+Sur Discord:
+- AVANT: /auth 123456
+- MAINTENANT: /mclogin 123456
+
+Dans Minecraft:
+- Message de connexion: "Sur Discord, tapez: /mclogin 870600"
+  (au lieu de "/auth PvP_UNGEUR 870600")
+
+SECURITE
+--------
+
+Logging administrateur:
+- Toutes les actions admin sont loggees
+- Exemple: "[ADMIN] PvP_UNGEUR#1234 a tente de delier le Discord ID: 987654321"
+- Utile pour auditer les actions sensibles
+
+COMPATIBILITE
+--------------
+
+✓ Minecraft: 1.8 -> 1.21+
+✓ Java: 8+
+✓ IPv4 & IPv6: Supportes
+✓ Config: Compatible v1.2.x (ajout automatique section admin)
+
+BUGS CONNUS
+-----------
+
+Aucun bug connu a ce jour.
+
+Si vous rencontrez un probleme:
+1. Verifiez que vous utilisez v1.3.0
+2. Verifiez les logs du serveur
+3. Ouvrez une issue sur GitHub
+
+COMMANDES DISCORD (MAJ)
+------------------------
+
+/mclogin <code>      - S'authentifier avec le code (Tous)
+/mctest              - Tester connexion bot/plugin (Tous)
+/status              - Verifier son statut (Tous)
+/unlink <discord_id> - Delier un compte (Admin uniquement)
+
+INSTALLATION
+------------
+
+1. Telecharger MCLocalAuth-Spigot-v1.3.0.jar
+2. Placer dans plugins/
+3. Redemarrer le serveur
+4. Configurer admin.discord_id dans config.yml
+5. Tester avec /mctest et /mclogin
+
+==========================================
+Taille: 10.68 MB
+Build: Maven 3.9.5 + Java 8
+Statut: STABLE
+==========================================

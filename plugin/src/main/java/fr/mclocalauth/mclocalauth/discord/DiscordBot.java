@@ -77,10 +77,11 @@ public class DiscordBot {
                         plugin.getLogger().info("[OK] Anciennes commandes supprimees");
                         // Puis enregistrer les nouvelles
                         guild.updateCommands().addCommands(
-                            Commands.slash("auth", "Authentifier votre compte Minecraft")
-                                .addOption(OptionType.STRING, "code", "Code d'authentification reçu en jeu", true),
-                            Commands.slash("status", "Vérifier votre statut d'authentification"),
-                            Commands.slash("unlink", "Délier votre compte Discord de Minecraft"),
+                            Commands.slash("mclogin", "Authentifier votre compte Minecraft")
+                                .addOption(OptionType.STRING, "code", "Code d'authentification recu en jeu", true),
+                            Commands.slash("status", "Verifier votre statut d'authentification"),
+                            Commands.slash("unlink", "Delier votre compte Discord de Minecraft")
+                                .addOption(OptionType.STRING, "discord_id", "ID Discord du joueur a delier", true),
                             Commands.slash("mctest", "Tester la connexion entre le bot et le plugin")
                         ).queue(
                             success2 -> plugin.getLogger().info("[OK] Nouvelles commandes Discord enregistrees sur le serveur"),
@@ -98,10 +99,11 @@ public class DiscordBot {
                 success -> {
                     plugin.getLogger().info("[OK] Anciennes commandes globales supprimees");
                     jda.updateCommands().addCommands(
-                        Commands.slash("auth", "Authentifier votre compte Minecraft")
-                            .addOption(OptionType.STRING, "code", "Code d'authentification reçu en jeu", true),
-                        Commands.slash("status", "Vérifier votre statut d'authentification"),
-                        Commands.slash("unlink", "Délier votre compte Discord de Minecraft"),
+                        Commands.slash("mclogin", "Authentifier votre compte Minecraft")
+                            .addOption(OptionType.STRING, "code", "Code d'authentification recu en jeu", true),
+                        Commands.slash("status", "Verifier votre statut d'authentification"),
+                        Commands.slash("unlink", "Delier votre compte Discord de Minecraft")
+                            .addOption(OptionType.STRING, "discord_id", "ID Discord du joueur a delier", true),
                         Commands.slash("mctest", "Tester la connexion entre le bot et le plugin")
                     ).queue(
                         success2 -> plugin.getLogger().info("[OK] Nouvelles commandes Discord enregistrees globalement"),

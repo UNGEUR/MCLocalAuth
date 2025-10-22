@@ -1,6 +1,6 @@
 name: MCLocalAuth
 main: fr.mclocalauth.mclocalauth.MCLocalAuthPlugin
-version: 1.2.3
+version: 1.3.0
 author: Author
 description: Plugin d'authentification avec bot Discord intégré - Compatible 1.8 à 1.21+
 api-version: 1.13

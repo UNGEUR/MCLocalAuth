@@ -34,17 +34,18 @@ public class LoginListener implements Listener {
         if (!authorizedIps.isEmpty()) {
             String currentIp = e.getAddress().getHostAddress();
             
-            // VÃ©rifier si l'IP actuelle est dans la liste des IP autorisÃ©es
+            // Verifier si l'IP actuelle est dans la liste des IP autorisees
             if (!storage.isIpAuthorized(uuid, currentIp)) {
                 String msg = plugin.getConfig().getString("messages.ipNotAuthorized", 
-                    "Â§cConnexion refusÃ©e: Votre IP n'est pas autorisÃ©e pour ce compte.\n\nÂ§7Votre IP: Â§f" + currentIp + 
-                    "\n\nÂ§eContactez un administrateur si vous jouez depuis un nouvel endroit.");
+                    "§cConnexion refusee: Votre IP n'est pas autorisee pour ce compte.\n\n§7Votre IP: §f" + currentIp + 
+                    "\n\n§eContactez un administrateur si vous jouez depuis un nouvel endroit.");
+                msg = msg.replace("%current_ip%", currentIp);
                 e.disallow(AsyncPlayerPreLoginEvent.Result.KICK_OTHER, msg);
                 
-                // Log de sÃ©curitÃ©
-                plugin.getLogger().warning("Tentative de connexion avec IP non autorisÃ©e: " + 
+                // Log de securite
+                plugin.getLogger().warning("Tentative de connexion avec IP non autorisee: " + 
                     e.getName() + "(" + uuid + ") depuis " + currentIp + 
-                    ". IP autorisÃ©es: " + authorizedIps);
+                    ". IP autorisees: " + authorizedIps);
             }
         }
     }
@@ -60,10 +61,10 @@ public class LoginListener implements Listener {
                 entry = pending.createFor(p);
             }
             
-            // CrÃ©er le message de dÃ©connexion avec le code
+            // Creer le message de deconnexion avec le code
             String kickMessage = createKickMessage(p, entry.code);
             
-            // DÃ©connecter le joueur immÃ©diatement avec le code dans le message
+            // Deconnecter le joueur immediatement avec le code dans le message
             Bukkit.getScheduler().runTaskLater(plugin, () -> {
                 if (p.isOnline()) {
                     p.kickPlayer(kickMessage);
@@ -74,7 +75,7 @@ public class LoginListener implements Listener {
 
     @EventHandler
     public void onQuit(PlayerQuitEvent e) {
-        // Rien de spÃ©cial: on laisse la demande en attente tant qu'elle n'expire pas
+        // Rien de special: on laisse la demande en attente tant qu'elle n'expire pas
     }
 
     private String createKickMessage(Player p, String code) {
@@ -82,7 +83,7 @@ public class LoginListener implements Listener {
         String prefix = cfg.getString("messages.prefix", "[Auth] ");
         StringBuilder message = new StringBuilder();
         
-        // Construire le message de dÃ©connexion avec les lignes de configuration
+        // Construire le message de deconnexion avec les lignes de configuration
         java.util.List<String> lines = cfg.getStringList("messages.firstJoin");
         for (int i = 0; i < lines.size(); i++) {
             String line = lines.get(i);

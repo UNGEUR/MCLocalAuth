@@ -4,7 +4,7 @@
 
     <groupId>fr.Author</groupId>
     <artifactId>mclocalauth</artifactId>
-    <version>1.2.3</version>
+    <version>1.3.0</version>
     <packaging>jar</packaging>
     <name>MCLocalAuth</name>
     <description>Plugin d'authentification avec bot Discord intégré</description>

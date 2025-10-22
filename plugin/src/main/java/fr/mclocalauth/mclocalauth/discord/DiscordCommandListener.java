@@ -35,7 +35,7 @@ public class DiscordCommandListener extends ListenerAdapter {
         String commandName = event.getName();
         
         switch (commandName) {
-            case "auth":
+            case "mclogin":
                 handleAuth(event);
                 break;
             case "status":
@@ -125,18 +125,36 @@ public class DiscordCommandListener extends ListenerAdapter {
                 "Pour vous authentifier :\n" +
                 "1. Connectez-vous au serveur Minecraft\n" +
                 "2. Notez le code affiche dans le message de deconnexion\n" +
-                "3. Utilisez `/auth <code>` sur Discord")
+                "3. Utilisez `/mclogin <code>` sur Discord")
         ).queue();
     }
     
     private void handleUnlink(SlashCommandInteractionEvent event) {
         event.deferReply(true).queue();
         
-        // Pour l'instant, cette fonctionnalite necessiterait d'ajouter le suivi Discord dans Storage
+        String executorDiscordId = event.getUser().getId();
+        String adminDiscordId = plugin.getConfig().getString("admin.discord_id", "");
+        
+        // Verifier si l'utilisateur est admin
+        if (!executorDiscordId.equals(adminDiscordId) || adminDiscordId.isEmpty()) {
+            event.getHook().editOriginalEmbeds(
+                createErrorEmbed("Acces refuse",
+                    "Seuls les administrateurs peuvent utiliser cette commande.")
+            ).queue();
+            return;
+        }
+        
+        String targetDiscordId = event.getOption("discord_id").getAsString();
+        
+        // TODO: Implementation complete necessiterait un systeme de liaison Discord dans Storage
+        // Pour l'instant on affiche juste le target
         event.getHook().editOriginalEmbeds(
-            createInfoEmbed("Delier le compte",
-                "Contactez un administrateur pour delier votre compte.")
+            createInfoEmbed("Fonction en developpement",
+                "La fonction /unlink pour le Discord ID: " + targetDiscordId + " sera implementee prochainement.\n" +
+                "Actuellement, utilisez /auth resetip <joueur> en jeu.")
         ).queue();
+        
+        plugin.getLogger().info("[ADMIN] " + event.getUser().getAsTag() + " a tente de delier le Discord ID: " + targetDiscordId);
     }
     
     private MessageEmbed createSuccessEmbed(String title, String description) {
