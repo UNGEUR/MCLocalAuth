@@ -153,7 +153,7 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 
 ## 🙏 Crédits
 
-**Développeur :** [Ton Pseudo]  
+**Développeur :** UNGEUR 
 **Librairies utilisées :**
 - [JDA](https://github.com/discord-jda/JDA) - Java Discord API
 - [Spigot API](https://www.spigotmc.org/) - Minecraft Server API
@@ -162,9 +162,8 @@ Ce projet est sous **licence propriétaire**. Voir le fichier [LICENSE](LICENSE)
 
 ## 📞 Support
 
-- **Discord :** [Lien serveur Discord]
+- **Discord :** [Serveur Discord](https://discord.gg/hPUhadNQXn)
 - **Issues :** [GitHub Issues](../../issues)
-- **Email :** [Ton email si tu veux]
 
 ---
 
