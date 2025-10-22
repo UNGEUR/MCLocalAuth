@@ -1,8 +1,8 @@
 ﻿{
   "minecraft_server": {
-    "host": "45.140.164.92",
-    "port": 25606,
-    "token": "MTQyMTIwNTA5OTI5MTg2OTI5Nw.Gsu2R5.oYqiEPjCuxIkeEOAn-Kh-urrZ0SIaZYzItlN4E",
+    "host": "",
+    "port": 00000,
+    "token": "token",
     "protocol": "http"
   },
   "auth": {
