@@ -1,0 +1,69 @@
+﻿# ============================================
+# Configuration MCLocalAuth v3.0
+# Serveur: 45.140.164.92:25606
+# ============================================
+
+# Configuration HTTP API (DÉSACTIVÉ - utilise Discord intégré)
+http:
+  enabled: false
+  host: 127.0.0.1
+  port: 8765
+  token: change-me
+
+# Configuration du bot Discord intégré (RECOMMANDÉ)
+discord:
+  enabled: true
+  # Remplacez par l'ID de votre serveur Discord
+  # Pour obtenir l'ID: Mode développeur → Clic droit sur serveur → Copier l'identifiant
+  guild_id: "VOTRE_ID_SERVEUR_DISCORD"
+  
+  # Remplacez par le token de votre bot Discord
+  # Pour obtenir le token: https://discord.com/developers/applications
+  # N'oubliez pas d'activer SERVER MEMBERS INTENT !
+  bot_token: "VOTRE_TOKEN_BOT_DISCORD"
+
+# Configuration des codes d'authentification
+code:
+  length: 6              # Longueur du code (4-8 chiffres)
+  expireSeconds: 600     # Expiration après 10 minutes
+
+# Restrictions pour les joueurs non authentifiés
+restrictions:
+  blockMovement: true    # Bloquer les déplacements
+  blockCommands: true    # Bloquer les commandes
+  allowCommands: []      # Liste des commandes autorisées
+  blockInteractions: true # Bloquer les interactions
+
+# Messages du plugin
+messages:
+  prefix: "§6[MCLocalAuth] §r"
+  
+  # Message de déconnexion avec le code d'authentification
+  firstJoin:
+    - "§6§l=== AUTHENTIFICATION DISCORD REQUISE ==="
+    - ""
+    - "§eBienvenue §a%player% §e!"
+    - "§cVous devez vous authentifier sur Discord pour jouer."
+    - ""
+    - "§eVotre code d'authentification:"
+    - "§f§l» §6§l%code% §f§l«"
+    - ""
+    - "§7Sur Discord, tapez: §b/auth %player% %code%"
+    - ""
+    - "§aReconnectez-vous après l'authentification Discord."
+  
+  # Messages divers
+  discordRequired: "§cVous devez être membre du serveur Discord pour jouer !"
+  pendingBlocked: "§cVous devez d'abord valider votre code via Discord."
+  ipNotAuthorized: "§cConnexion refusée: Votre IP n'est pas autorisée pour ce compte.\n\n§7Votre IP: §f%current_ip%\n\n§eContactez un administrateur si vous jouez depuis un nouvel endroit."
+  mismatchKick: "§cConnexion refusée: votre adresse IP ne correspond pas à celle enregistrée. Contactez un administrateur."
+  validated: "§aAuthentification réussie. Votre IP est désormais liée à votre compte."
+  notPending: "§eAucune validation en attente pour vous."
+  
+  # Messages admin
+  admin:
+    setip: "§aIP mise à jour pour %player% → %ip%"
+    resetip: "§aIP réinitialisée pour %player%"
+    showip: "§eIP de %player%: %ip%"
+    notfound: "§cAucun joueur trouvé: %player%"
+    noip: "§eAucune IP enregistrée pour %player%"

@@ -1,0 +1,216 @@
+╔══════════════════════════════════════════════════════════════╗
+║           📦 MCLocalAuth - Version 1.2.0                     ║
+║              21 Octobre 2025 - 19:33                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 OBJECTIF DE CETTE VERSION
+════════════════════════════════════════════════════════════════
+
+Corriger les problèmes de fonctionnement du bot Discord et 
+simplifier l'authentification pour améliorer l'expérience 
+utilisateur.
+
+────────────────────────────────────────────────────────────────
+
+✨ NOUVELLES FONCTIONNALITÉS
+════════════════════════════════════════════════════════════════
+
+1. 🔍 Commande /mctest ajoutée
+   ─────────────────────────────────────────────────────────
+   Une nouvelle commande Discord pour tester la connexion 
+   entre le bot et le plugin Minecraft.
+   
+   Utilisation : /mctest
+   
+   Affiche :
+   • Statut de connexion (CONNECTÉ/DÉCONNECTÉ)
+   • Version du serveur Minecraft
+   • Version du plugin
+   • Nombre de joueurs en ligne
+   • Nombre d'authentifications en attente
+   • Statut du bot Discord
+
+────────────────────────────────────────────────────────────────
+
+🔧 CORRECTIONS MAJEURES
+════════════════════════════════════════════════════════════════
+
+2. ✅ Commande /auth simplifiée
+   ─────────────────────────────────────────────────────────
+   AVANT : /auth <pseudo> <code>
+   APRÈS  : /auth <code>
+   
+   Le pseudo n'est plus nécessaire ! Le bot recherche 
+   automatiquement le joueur correspondant au code parmi tous 
+   les joueurs en attente d'authentification.
+   
+   Avantages :
+   • Plus simple à utiliser
+   • Moins d'erreurs de frappe
+   • Authentification plus rapide
+
+3. 🔍 Correction : "Joueur introuvable"
+   ─────────────────────────────────────────────────────────
+   PROBLÈME RÉSOLU : Le bot ne trouvait pas les joueurs car 
+   il cherchait uniquement parmi les joueurs authentifiés.
+   
+   SOLUTION : Le bot cherche maintenant dans la liste des 
+   codes en attente (PendingManager) au lieu de chercher 
+   directement le joueur connecté.
+   
+   Résultat : Le bot trouve maintenant correctement tous les 
+   joueurs qui tentent de se connecter.
+
+4. 🌐 Recherche étendue du code
+   ─────────────────────────────────────────────────────────
+   Le système parcourt automatiquement TOUS les joueurs en 
+   ligne ayant un code en attente pour trouver la 
+   correspondance, au lieu de se limiter à un seul joueur.
+
+────────────────────────────────────────────────────────────────
+
+📊 DÉTAILS TECHNIQUES
+════════════════════════════════════════════════════════════════
+
+Fichiers modifiés :
+  • DiscordBot.java
+    → Ajout de /mctest aux commandes enregistrées
+    → Retrait du paramètre "pseudo" dans /auth
+  
+  • DiscordCommandListener.java
+    → Nouvelle méthode handleMcTest()
+    → handleAuth() réécrite pour chercher le code dans tous 
+      les joueurs en attente
+    → Boucle sur Bukkit.getOnlinePlayers() + PendingManager
+  
+  • pom.xml (plugin & bungeecord)
+    → Version incrémentée : 1.1.0 → 1.2.0
+  
+  • plugin.yml & bungee.yml
+    → Version mise à jour : 1.2.0
+
+Algorithme de recherche (handleAuth) :
+  1. Validation du format du code (4-8 chiffres)
+  2. Vérification de l'appartenance au serveur Discord
+  3. Parcours de tous les joueurs en ligne
+  4. Pour chaque joueur :
+     a. Vérifier s'il a un code en attente
+     b. Comparer le code (sans consommer)
+  5. Si match trouvé :
+     a. Consommer le code
+     b. Enregistrer l'IP du joueur
+     c. Notifier le joueur in-game
+     d. Confirmer sur Discord
+
+────────────────────────────────────────────────────────────────
+
+🚀 UTILISATION
+════════════════════════════════════════════════════════════════
+
+Pour l'utilisateur Discord :
+  1. Se connecter au serveur Minecraft
+  2. Noter le code affiché à l'écran
+  3. Utiliser /auth <code> sur Discord
+  4. Attendre la confirmation
+  5. Jouer !
+
+Pour tester la connexion :
+  → Utiliser /mctest sur Discord
+  → Vérifier que le statut est "CONNECTÉ"
+
+────────────────────────────────────────────────────────────────
+
+⚙️ INSTALLATION
+════════════════════════════════════════════════════════════════
+
+1. Arrêter le serveur Minecraft
+
+2. Remplacer l'ancien JAR :
+   Supprimer : MCLocalAuth-Spigot-v1.1.0.jar
+   Ajouter   : MCLocalAuth-Spigot-v1.2.0.jar
+
+3. Redémarrer le serveur
+
+4. Tester avec /mctest sur Discord
+
+Note : La configuration (config.yml) reste identique, aucun 
+      changement requis.
+
+────────────────────────────────────────────────────────────────
+
+📋 COMPARATIF DES VERSIONS
+════════════════════════════════════════════════════════════════
+
+Version 1.1.0 (Précédente)
+  ❌ /auth nécessitait pseudo + code
+  ❌ Erreur "Joueur introuvable"
+  ❌ Pas de commande de test
+  ❌ Recherche limitée à un joueur
+
+Version 1.2.0 (Actuelle)
+  ✅ /auth ne nécessite que le code
+  ✅ Trouve tous les joueurs en attente
+  ✅ Commande /mctest disponible
+  ✅ Recherche dans tous les codes en attente
+  ✅ Messages d'erreur plus clairs
+
+────────────────────────────────────────────────────────────────
+
+📦 INFORMATIONS DU FICHIER
+════════════════════════════════════════════════════════════════
+
+Fichier   : MCLocalAuth-Spigot-v1.2.0.jar
+Taille    : 10.68 MB
+Date      : 21/10/2025 19:33
+Version   : 1.2.0
+Build     : Maven + Java 8 (1.8.0_432)
+API       : Spigot 1.16.5 (compatible 1.8 → 1.21+)
+
+Dependencies embarquées :
+  • JDA 5.0.0-beta.20 (Discord API)
+  • JSON 20231013
+  • OkHttp 4.12.0
+  • Jackson 2.16.0
+  • Kotlin stdlib
+
+────────────────────────────────────────────────────────────────
+
+🐛 BUGS CONNUS
+════════════════════════════════════════════════════════════════
+
+Aucun bug connu à ce jour.
+
+Si vous rencontrez un problème, vérifiez :
+  1. Le token Discord est correct dans config.yml
+  2. Le bot a les permissions nécessaires
+  3. Les intents Discord sont activés (GUILD_MEMBERS)
+  4. Le serveur utilise Java 8 minimum
+
+────────────────────────────────────────────────────────────────
+
+📞 SUPPORT
+════════════════════════════════════════════════════════════════
+
+En cas de problème :
+  1. Vérifier les logs du serveur
+  2. Utiliser /mctest pour diagnostiquer
+  3. Vérifier config.yml
+  4. Redémarrer le serveur
+
+────────────────────────────────────────────────────────────────
+
+🎓 PROCHAINES VERSIONS (ROADMAP)
+════════════════════════════════════════════════════════════════
+
+Idées pour v1.3.0 :
+  • Système de liaison Discord persistante
+  • Commande /unlink fonctionnelle
+  • Statistiques d'authentification
+  • Multi-langue (EN/FR)
+  • Panel web d'administration
+
+────────────────────────────────────────────────────────────════
+
+✨ Le plugin est prêt à être utilisé !
+
+Testez avec /mctest pour vérifier que tout fonctionne.

@@ -1,0 +1,16 @@
+name: MCLocalAuth
+main: fr.mclocalauth.mclocalauth.MCLocalAuthPlugin
+version: 1.2.3
+author: Author
+description: Plugin d'authentification avec bot Discord intégré - Compatible 1.8 à 1.21+
+api-version: 1.13
+load: STARTUP
+commands:
+  auth:
+    description: Commandes admin pour MCLocalAuth
+    usage: /auth <setip|resetip|showip>
+    permission: mclocalauth.admin
+permissions:
+  mclocalauth.admin:
+    description: Accès aux commandes administrateur de MCLocalAuth
+    default: op

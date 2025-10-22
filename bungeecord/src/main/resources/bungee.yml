@@ -1,0 +1,5 @@
+﻿name: MCLocalAuth-Bungee
+main: fr.Author.mclocalauth.MCLocalAuthBungee
+version: 1.2.0
+author: Author
+description: Plugin d'authentification BungeeCord avec bot Discord intégré

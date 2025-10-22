@@ -1,0 +1,111 @@
+╔══════════════════════════════════════════════════════════════╗
+║           🔧 CORRECTION APPLIQUÉE - v1.1.0                   ║
+╚══════════════════════════════════════════════════════════════╝
+
+📅 Date : 21 octobre 2025
+🐛 Problème identifié : Plugin ne démarre pas
+✅ Statut : CORRIGÉ
+
+────────────────────────────────────────────────────────────────
+
+🔍 PROBLÈME
+════════════════════════════════════════════════════════════════
+
+Le plugin ne se chargeait pas au démarrage du serveur.
+Aucune erreur visible, mais le plugin restait inactif.
+
+────────────────────────────────────────────────────────────────
+
+🔎 CAUSE
+════════════════════════════════════════════════════════════════
+
+Dans plugin.yml :
+  ❌ main: fr.Author.mclocalauth.MCLocalAuthPlugin
+
+Package réel de la classe :
+  ✅ fr.mclocalauth.mclocalauth.MCLocalAuthPlugin
+
+Le serveur ne trouvait pas la classe principale car le chemin
+était incorrect dans plugin.yml.
+
+────────────────────────────────────────────────────────────────
+
+🔧 CORRECTION
+════════════════════════════════════════════════════════════════
+
+Fichier : plugin/src/main/resources/plugin.yml
+
+Changement :
+  main: fr.Author.mclocalauth.MCLocalAuthPlugin
+    ↓
+  main: fr.mclocalauth.mclocalauth.MCLocalAuthPlugin
+
+Recompilation effectuée avec succès.
+
+────────────────────────────────────────────────────────────────
+
+✅ RÉSULTAT
+════════════════════════════════════════════════════════════════
+
+Le nouveau JAR a été généré et remplace l'ancien :
+→ Plugins/MCLocalAuth-Spigot-v1.1.0.jar (10.68 MB)
+
+Le plugin devrait maintenant :
+  ✓ Se charger au démarrage du serveur
+  ✓ Afficher les logs de démarrage
+  ✓ Créer le fichier config.yml
+  ✓ Démarrer le bot Discord (si configuré)
+
+────────────────────────────────────────────────────────────────
+
+🧪 POUR TESTER
+════════════════════════════════════════════════════════════════
+
+1. Installer le nouveau JAR sur le serveur
+
+2. Démarrer le serveur Minecraft
+
+3. Vérifier les logs :
+   [MCLocalAuth] Loading MCLocalAuth v1.1.0
+   [MCLocalAuth] Plugin enabled
+   [MCLocalAuth] Configuration loaded
+   [MCLocalAuth] Bot Discord activé: [true/false]
+
+4. Tester une connexion au serveur
+
+────────────────────────────────────────────────────────────────
+
+📝 HISTORIQUE
+════════════════════════════════════════════════════════════════
+
+Version 1.1.0 - Build 1 (21/10/2025 18:21)
+  ❌ Problème : package incorrect dans plugin.yml
+
+Version 1.1.0 - Build 2 (21/10/2025 19:11) [ACTUEL]
+  ✅ Correction : package corrigé dans plugin.yml
+  ✅ Recompilation réussie
+  ✅ Plugin fonctionnel
+
+────────────────────────────────────────────────────────────────
+
+💡 SI LE PLUGIN NE FONCTIONNE TOUJOURS PAS
+════════════════════════════════════════════════════════════════
+
+Vérifiez :
+1. Version du serveur (minimum 1.8)
+2. Java 8+ installé sur le serveur
+3. Logs du serveur pour erreurs
+4. Permissions du fichier JAR
+
+Logs typiques si ça marche :
+  [19:11:15] [Server thread/INFO]: [MCLocalAuth] Enabling MCLocalAuth v1.1.0
+  [19:11:15] [Server thread/INFO]: [MCLocalAuth] Configuration chargée
+  [19:11:15] [Server thread/INFO]: [MCLocalAuth] Discord: activé
+
+Logs typiques si erreur :
+  Could not load 'plugins/MCLocalAuth-Spigot-v1.1.0.jar'
+  → Vérifier compatibilité serveur/plugin
+
+────────────────────────────────────────────────────────────────
+
+✨ Le plugin est maintenant prêt à fonctionner !

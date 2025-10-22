@@ -1,0 +1,36 @@
+====================================================
+        EXEMPLE DU MESSAGE DE DÉCONNEXION
+====================================================
+
+Quand un joueur se connecte pour la première fois, 
+il verra ce message dans son écran de déconnexion :
+
+----------------------------------------------------
+
+§6§l=== AUTHENTIFICATION DISCORD REQUISE ===
+
+§eBienvenue §aPlayerName §e!
+§cVous devez vous authentifier sur Discord pour jouer.
+
+§eVotre code d'authentification:
+§f§l» §6§l123456 §f§l«
+
+§7Sur Discord, tapez: §b/auth PlayerName 123456
+
+§aReconnectez-vous après l'authentification Discord.
+
+----------------------------------------------------
+
+Ce message apparaitra dans la popup de déconnexion 
+de Minecraft, avec les codes couleurs Minecraft.
+
+Le joueur verra clairement :
+1. Son pseudo (PlayerName)
+2. Le code d'authentification (123456) en gros et en jaune
+3. La commande exacte à taper sur Discord
+4. Qu'il doit se reconnecter après
+
+Le code sera différent à chaque connexion et expirera 
+après 10 minutes (configurable).
+
+====================================================

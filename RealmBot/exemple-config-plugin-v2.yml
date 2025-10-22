@@ -1,0 +1,60 @@
+﻿# Configuration pour le plugin MCLocalAuth - Version 2.0
+# Ce fichier doit être placé dans plugins/MCLocalAuth/config.yml sur votre serveur Minecraft
+
+# Configuration de l'API HTTP pour la communication avec le bot Discord
+http:
+  enabled: true
+  host: "0.0.0.0"  # IMPORTANT: 0.0.0.0 pour accepter les connexions externes
+  port: 8765       # Port d'écoute (doit correspondre à celui du bot)
+  token: "mon-token-super-securise-123456"  # Token sécurisé (à changer absolument !)
+
+# Configuration Discord - NOUVEAU !
+discord:
+  enabled: true
+  guild_id: "123456789012345678"  # ID de votre serveur Discord
+  bot_token: "votre_token_bot_discord"  # Token de votre bot Discord
+
+# Configuration des codes d'authentification
+code:
+  length: 6              # Longueur du code (entre 4 et 8 chiffres)
+  expireSeconds: 600     # Durée de validité en secondes (600 = 10 minutes)
+
+# Configuration des restrictions pour les joueurs non authentifiés
+restrictions:
+  blockMovement: true       # Bloquer les déplacements
+  blockCommands: true       # Bloquer les commandes
+  allowCommands: []         # Commandes autorisées (ex: ["/help", "/rules"])
+  blockInteractions: true   # Bloquer les interactions
+
+# Configuration des messages
+messages:
+  prefix: "§6[MCLocalAuth] §r"
+  
+  # Messages de déconnexion avec code - VERSION FINALE !
+  firstJoin:
+    - "§6§l=== AUTHENTIFICATION DISCORD REQUISE ==="
+    - ""
+    - "§eBienvenue §a%player% §e!"
+    - "§cVous devez vous authentifier sur Discord pour jouer."
+    - ""
+    - "§eVotre code d'authentification:"
+    - "§f§l» §6§l%code% §f§l«"
+    - ""
+    - "§7Sur Discord, tapez: §b/auth %player% %code%"
+    - ""
+    - "§aReconnectez-vous après l'authentification Discord."
+  
+  # Autres messages
+  pendingBlocked: "§cVous devez d'abord valider votre code via Discord."
+  mismatchKick: "§cConnexion refusée: votre adresse IP ne correspond pas à celle enregistrée."
+  validated: "§aAuthentification Discord réussie ! Bienvenue sur le serveur !"
+  notPending: "§eAucune validation en attente pour vous."
+  discordRequired: "§cVous devez être membre du serveur Discord pour jouer !"  # NOUVEAU !
+  
+  # Messages d'administration
+  admin:
+    setip: "§aIP mise à jour pour %player% → %ip%"
+    resetip: "§aIP réinitialisée pour %player%"
+    showip: "§eIP de %player%: %ip%"
+    notfound: "§cAucun joueur trouvé: %player%"
+    noip: "§eAucune IP enregistrée pour %player%"

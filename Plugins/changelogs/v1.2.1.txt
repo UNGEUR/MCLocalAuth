@@ -1,0 +1,64 @@
+╔══════════════════════════════════════════════════════════════╗
+║           MCLocalAuth - Version 1.2.1                        ║
+║              21 Octobre 2025 - 19:53                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 TYPE : Hotfix - Correction commandes Discord
+
+════════════════════════════════════════════════════════════════
+
+🔧 CORRECTION PRINCIPALE
+════════════════════════════════════════════════════════════════
+
+Problème : Commande /auth avec paramètre "pseudo" en cache
+───────────────────────────────────────────────────────────────
+
+Discord gardait l'ancienne version de /auth avec 2 paramètres:
+  /auth <pseudo> <code>
+
+Alors que v1.2.0 avait changé pour:
+  /auth <code>
+
+Cause : Discord met en cache les commandes (jusqu'à 1h)
+
+Solution : Suppression forcée avant enregistrement
+────────────────────────────────────────────────────────────
+
+Nouvelle logique dans DiscordBot.java :
+
+1. Supprimer TOUTES les anciennes commandes
+2. Attendre confirmation
+3. Enregistrer les nouvelles commandes
+
+Code ajouté :
+  guild.updateCommands().queue() // Vide les commandes
+  → Puis guild.updateCommands().addCommands(...)
+
+════════════════════════════════════════════════════════════════
+
+✅ RÉSULTAT
+════════════════════════════════════════════════════════════════
+
+- Commande /auth mise à jour instantanément
+- Plus de champ "pseudo" dans Discord
+- Seulement : /auth <code>
+
+════════════════════════════════════════════════════════════════
+
+⚙️ INSTALLATION
+════════════════════════════════════════════════════════════════
+
+1. Remplacer par MCLocalAuth-Spigot-v1.2.1-HOTFIX.jar
+2. Redémarrer serveur
+3. Les commandes Discord se mettent à jour automatiquement
+
+Logs attendus :
+  "Suppression des anciennes commandes Discord..."
+  "Anciennes commandes supprimees"
+  "Nouvelles commandes Discord enregistrees"
+
+════════════════════════════════════════════════════════════════
+
+Fichier  : MCLocalAuth-Spigot-v1.2.1-HOTFIX.jar
+Taille   : 10.68 MB
+Statut   : HOTFIX

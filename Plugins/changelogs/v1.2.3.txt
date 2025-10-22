@@ -1,0 +1,152 @@
+╔══════════════════════════════════════════════════════════════╗
+║           MCLocalAuth - Version 1.2.3                        ║
+║              21 Octobre 2025 - 22:06                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 TYPE DE MISE À JOUR : Correctifs critiques
+
+════════════════════════════════════════════════════════════════
+
+✅ CORRECTIONS
+════════════════════════════════════════════════════════════════
+
+1. 🔤 Encodage UTF-8 corrigé
+   ─────────────────────────────────────────────────────────
+   Problème : Messages Discord avec caractères bizarres
+   Exemple  : "â„¹ï¸ DÃ©lier le compte"
+   
+   Solution : Tous les messages sans accents/émojis spéciaux
+   - Titres Discord : Texte simple ASCII
+   - Logs serveur : [OK], [ERREUR], [WARN]
+   - Plus d'emojis problématiques (✅ ❌ ⚠️)
+   
+   Résultat : Messages propres et lisibles partout
+
+2. ⚙️ Configuration administrateur ajoutée
+   ─────────────────────────────────────────────────────────
+   Nouveau dans config.yml :
+   
+   admin:
+     discord_id: "YOUR_DISCORD_ID"
+     minecraft_uuid: ""
+   
+   Permet de stocker les identifiants admin pour
+   futures fonctionnalités (commandes réservées, etc.)
+
+3. 📝 Commande /status mise à jour
+   ─────────────────────────────────────────────────────────
+   Ancien texte : "/auth <pseudo> <code>"
+   Nouveau texte : "/auth <code>"
+   
+   Cohérent avec la v1.2.2
+
+════════════════════════════════════════════════════════════════
+
+🔧 DÉTAILS TECHNIQUES
+════════════════════════════════════════════════════════════════
+
+Fichiers modifiés :
+  • config.yml
+    → Ajout section admin (discord_id, minecraft_uuid)
+  
+  • DiscordBot.java
+    → Logs sans émojis UTF-8
+    → Messages : "Demarrage", "connecte", etc.
+  
+  • DiscordCommandListener.java
+    → Tous les messages Discord en ASCII simple
+    → Titres sans émojis (✅❌ → texte)
+    → "ete" au lieu de "été", etc.
+
+Raison : Java 8 + Console Windows = Problèmes UTF-8
+Solution : ASCII uniquement pour stabilité maximale
+
+════════════════════════════════════════════════════════════════
+
+📦 COMPATIBILITÉ
+════════════════════════════════════════════════════════════════
+
+✅ Minecraft : 1.8 → 1.21+
+✅ Java : 8+
+✅ Serveur : Spigot, Paper, Purpur
+✅ Config : Compatible v1.2.0-1.2.2 (ajout section admin)
+
+Migration depuis v1.2.2 :
+→ Aucune action requise
+→ Section admin ajoutée automatiquement au 1er démarrage
+
+════════════════════════════════════════════════════════════════
+
+🎮 UTILISATION
+════════════════════════════════════════════════════════════════
+
+Configuration admin (optionnel) :
+1. Ouvrir plugins/MCLocalAuth/config.yml
+2. Trouver la section "admin"
+3. Remplir :
+   - discord_id : Ton ID Discord (clic droit > Copier l'ID)
+   - minecraft_uuid : (optionnel) Ton UUID Minecraft
+
+Pour obtenir ton UUID :
+→ https://mcuuid.net/?q=TON_PSEUDO
+
+════════════════════════════════════════════════════════════════
+
+🐛 BUGS CORRIGÉS
+════════════════════════════════════════════════════════════════
+
+✅ Messages Discord illisibles (encodage)
+✅ Émojis cassés dans les logs
+✅ Texte "/auth <pseudo> <code>" obsolète
+
+════════════════════════════════════════════════════════════════
+
+📋 VERSIONS PRÉCÉDENTES
+════════════════════════════════════════════════════════════════
+
+v1.2.2 (21/10/2025 19:53)
+  → Correction recherche code (findByCode)
+  → Le code fonctionne même après kick
+
+v1.2.1 (21/10/2025 19:53)
+  → Suppression forcée anciennes commandes Discord
+  → /auth sans paramètre pseudo
+
+v1.2.0 (21/10/2025 19:33)
+  → Ajout /mctest
+  → Simplification /auth (code seul)
+  → Correction "joueur introuvable"
+
+v1.1.0 (21/10/2025 19:12)
+  → Correction package plugin.yml
+  → Build initial fonctionnel
+
+════════════════════════════════════════════════════════════════
+
+⚙️ INSTALLATION
+════════════════════════════════════════════════════════════════
+
+1. Arrêter le serveur
+2. Remplacer l'ancien JAR par MCLocalAuth-Spigot-v1.2.3.jar
+3. (Optionnel) Configurer admin.discord_id dans config.yml
+4. Redémarrer le serveur
+5. Tester avec /mctest sur Discord
+
+════════════════════════════════════════════════════════════════
+
+✨ PROCHAINE VERSION (v1.3.0)
+════════════════════════════════════════════════════════════════
+
+Fonctionnalités prévues :
+  • Commandes admin réservées (via discord_id)
+  • Système de liaison Discord persistant
+  • /unlink fonctionnel
+  • Statistiques d'authentification
+  • Support multi-langue (FR/EN)
+
+════════════════════════════════════════════════════════════════
+
+Fichier  : MCLocalAuth-Spigot-v1.2.3.jar
+Taille   : 10.68 MB
+Build    : Maven 3.9.5 + Java 8 (1.8.0_432)
+Statut   : STABLE ✅

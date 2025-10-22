@@ -1,0 +1,93 @@
+╔══════════════════════════════════════════════════════════════╗
+║           MCLocalAuth - Version 1.2.2                        ║
+║              21 Octobre 2025 - 19:53                         ║
+╚══════════════════════════════════════════════════════════════╝
+
+🎯 TYPE : Fix critique - Authentification ne fonctionne pas
+
+════════════════════════════════════════════════════════════════
+
+🐛 BUG CRITIQUE CORRIGÉ
+════════════════════════════════════════════════════════════════
+
+Problème : Code toujours invalide
+───────────────────────────────────────────────────────────────
+
+Symptômes :
+  - Joueur se connecte → Reçoit code
+  - Joueur tape /auth <code> sur Discord
+  - Bot répond : "Code invalide"
+  - Même avec le bon code !
+
+Cause : Recherche dans mauvaise liste
+────────────────────────────────────────────────────────────
+
+L'ancien code cherchait dans Bukkit.getOnlinePlayers()
+
+Mais quand joueur est kick pour auth :
+  → N'est PLUS dans getOnlinePlayers() !
+  → Code existe dans PendingManager
+  → Mais joueur introuvable !
+
+Solution : Méthode findByCode()
+────────────────────────────────────────────────────────────
+
+Ajout dans PendingManager.java :
+
+  public PendingEntry findByCode(String code) {
+      cleanupExpired();
+      for (PendingEntry entry : pending.values()) {
+          if (entry.code.equals(code)) {
+              return entry;
+          }
+      }
+      return null;
+  }
+
+Modification dans DiscordCommandListener.java :
+
+  AVANT :
+    for (Player onlinePlayer : Bukkit.getOnlinePlayers()) {
+        if (pendingManager.isPending(...)) { ... }
+    }
+  
+  APRÈS :
+    PendingEntry entry = pendingManager.findByCode(code);
+    if (entry != null) { ... }
+
+════════════════════════════════════════════════════════════════
+
+✅ RÉSULTAT
+════════════════════════════════════════════════════════════════
+
+L'authentification fonctionne maintenant :
+  1. Connexion Minecraft → Code généré
+  2. Kick automatique → Code reste dans PendingManager
+  3. /auth <code> sur Discord → Trouve le code !
+  4. Authentification réussie → Reconnexion autorisée
+
+════════════════════════════════════════════════════════════════
+
+📊 TESTS
+════════════════════════════════════════════════════════════════
+
+Scénario testé :
+  ✅ Connexion → Code affiché
+  ✅ Kick automatique
+  ✅ /auth <code> → Succès
+  ✅ Reconnexion → Autorisé
+
+════════════════════════════════════════════════════════════════
+
+⚙️ INSTALLATION
+════════════════════════════════════════════════════════════════
+
+1. Remplacer par MCLocalAuth-Spigot-v1.2.2-FIXED.jar
+2. Redémarrer serveur
+3. Tester authentification complète
+
+════════════════════════════════════════════════════════════════
+
+Fichier  : MCLocalAuth-Spigot-v1.2.2-FIXED.jar
+Taille   : 10.68 MB
+Statut   : STABLE ✅

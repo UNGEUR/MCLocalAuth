@@ -1,0 +1,31 @@
+﻿# Configuration exemple pour le plugin MCLocalAuth
+# Ce fichier doit être placé dans plugins/MCLocalAuth/config.yml sur votre serveur Minecraft
+
+# Configuration de l'API HTTP pour la communication avec le bot Discord
+http:
+  enabled: true
+  host: "0.0.0.0"  # IMPORTANT: 0.0.0.0 pour accepter les connexions externes
+  port: 8765       # Port d'écoute (doit correspondre à celui du bot)
+  token: "mon-token-super-securise-123456"  # Token sécurisé (à changer absolument !)
+
+# Configuration des messages d'authentification
+messages:
+  prefix: "§6[Auth] §r"
+  kick_message: "§cVeuillez vous authentifier sur Discord avant de jouer."
+  already_authenticated: "§aVous êtes déjà authentifié !"
+  code_generated: "§eVotre code d'authentification: §b%code%§e\\nUtilisez §f/auth %player% %code%§e sur Discord."
+  validated: "§aAuthentification Discord réussie ! Bienvenue sur le serveur !"
+  expired: "§cVotre code d'authentification a expiré. Reconnectez-vous pour en recevoir un nouveau."
+  
+# Configuration des codes d'authentification
+code:
+  length: 6              # Longueur du code (entre 4 et 8 chiffres)
+  expireSeconds: 600     # Durée de validité en secondes (600 = 10 minutes)
+
+# Messages d'administration
+admin:
+  setip: "§aIP définie pour §e%player%§a: §f%ip%"
+  resetip: "§aIP réinitialisée pour §e%player%"
+  showip: "§eIP de §f%player%§e: §f%ip%"
+  noip: "§c%player% n'a pas d'IP enregistrée."
+  notfound: "§cJoueur §f%player%§c introuvable."

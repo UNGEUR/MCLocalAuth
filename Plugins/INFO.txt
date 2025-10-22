@@ -1,0 +1,119 @@
+╔═══════════════════════════════════════════════════════════════╗
+║                  MCLocalAuth v1.1.0                           ║
+║            Authentification Discord pour Minecraft            ║
+╚═══════════════════════════════════════════════════════════════╝
+
+📦 CONTENU DE CE DOSSIER
+════════════════════════════════════════════════════════════════
+
+✅ MCLocalAuth-Spigot-v1.1.0.jar (11.2 MB)
+   - Pour serveurs Spigot/Paper/Purpur
+   - Compatible Minecraft 1.8 à 1.21+
+   - Bot Discord intégré
+   
+📖 README.md
+   - Documentation complète d'installation
+   - Guide de configuration
+   - Changelog
+
+────────────────────────────────────────────────────────────────
+
+🚀 INSTALLATION RAPIDE
+════════════════════════════════════════════════════════════════
+
+1. Copier MCLocalAuth-Spigot-v1.1.0.jar dans plugins/
+
+2. Démarrer le serveur (génère config.yml)
+
+3. Éditer plugins/MCLocalAuth/config.yml :
+   discord:
+     enabled: true
+     guild_id: "VOTRE_ID_DISCORD"
+     bot_token: "VOTRE_TOKEN_BOT"
+
+4. Redémarrer le serveur
+
+✅ Le bot Discord démarre automatiquement !
+
+────────────────────────────────────────────────────────────────
+
+🔑 CONFIGURATION DISCORD
+════════════════════════════════════════════════════════════════
+
+Token Discord :
+→ https://discord.com/developers/applications
+→ Créer application → Bot → Copier token
+→ IMPORTANT : Activer SERVER MEMBERS INTENT
+
+ID Serveur Discord :
+→ Mode développeur Discord
+→ Clic droit sur serveur → Copier l'identifiant
+
+────────────────────────────────────────────────────────────────
+
+🎯 FONCTIONNALITÉS
+════════════════════════════════════════════════════════════════
+
+✅ Authentification Discord obligatoire
+✅ Bot Discord intégré (démarre avec le serveur)
+✅ Protection IP avancée (anti-usurpation)
+✅ Codes temporaires (expiration 10 min)
+✅ Commandes admin pour gérer les IP
+✅ Vérification membre Discord automatique
+✅ Aucun port réseau à ouvrir
+✅ Messages personnalisables
+
+────────────────────────────────────────────────────────────────
+
+📊 INFORMATIONS TECHNIQUES
+════════════════════════════════════════════════════════════════
+
+Version       : 1.1.0
+Compatible    : Minecraft 1.8 - 1.21+
+Taille        : ~11 MB (inclut JDA 5.0)
+Java requis   : 8+
+Dépendances   : Aucune (tout inclus)
+Type serveur  : Spigot, Paper, Purpur
+
+────────────────────────────────────────────────────────────────
+
+💬 COMMANDES DISCORD
+════════════════════════════════════════════════════════════════
+
+/auth <pseudo> <code>  - S'authentifier
+/status                - Vérifier son statut
+/unlink                - Délier son compte
+
+────────────────────────────────────────────────────────────────
+
+🛠️ COMMANDES MINECRAFT (ADMIN)
+════════════════════════════════════════════════════════════════
+
+/auth showips <joueur>         - Voir les IP autorisées
+/auth addip <joueur> <ip>      - Ajouter une IP
+/auth removeip <joueur> <ip>   - Supprimer une IP
+/auth resetip <joueur>         - Réinitialiser les IP
+/auth setip <joueur> <ip>      - Définir IP principale
+
+────────────────────────────────────────────────────────────────
+
+🆘 SUPPORT
+════════════════════════════════════════════════════════════════
+
+Documentation complète :
+→ Voir README.md dans le dossier racine
+→ QU_EST_CE_QUE_MCLOCALAUTH.md - Explications détaillées
+→ INSTALLATION_SERVEUR.md - Guide serveur distant
+
+Dépannage :
+→ Vérifier les logs du serveur Minecraft
+→ Vérifier que le bot est en ligne sur Discord
+→ Vérifier les intents Discord activés
+
+────────────────────────────────────────────────────────────────
+
+✨ Le bot Discord démarre automatiquement avec le serveur !
+🔐 Sécurisez votre serveur, protégez vos joueurs.
+
+════════════════════════════════════════════════════════════════
+MCLocalAuth v1.1.0 - Bot Discord Intégré

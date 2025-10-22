@@ -1,0 +1,13 @@
+﻿{
+  "minecraft_server": {
+    "host": "45.140.164.92",
+    "port": 25606,
+    "token": "MTQyMTIwNTA5OTI5MTg2OTI5Nw.Gsu2R5.oYqiEPjCuxIkeEOAn-Kh-urrZ0SIaZYzItlN4E",
+    "protocol": "http"
+  },
+  "auth": {
+    "role_name": "Authentifié",
+    "channel_id": null,
+    "timeout_minutes": 10
+  }
+}
